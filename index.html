@@ -12,7 +12,8 @@
 <body>
     <div class="calculator-container">
         <div class="screen">
-            0
+            <div class = "screenInput"> </div>
+            <div class = "screenTotal">0</div>
         </div>
         <div class="numbers">
             <button type="button" id = "1">1</button>
@@ -25,17 +26,18 @@
             <button type="button" id = "8">8</button>
             <button type="button" id = "9">9</button>
             <button type="button" id = "0">0</button>
+            <button type="button" id = ".">.</button>
         </div>
         <div class="operations">
             <button type="button" id = "+">+</button>
             <button type="button" id = "-">-</button>
             <button type="button" id = "*">*</button>
-            <button type="button" id = "/">/</button>
+            <button type="button" id = "/">/</button> 
             <button type="button" id = "=">=</button>
         </div>
-        <div class = "other">
-            
-            <button type="button" id = "clear">clear</button>
+        <div class = "deletions">
+            <button type="button" id = "delete" onclick="deleteOrAC(this.id)">DEL</button>
+            <button type="button" id = "clearAll" onclick="deleteOrAC(this.id)">AC</button>
         </div>
     </div>
 </body>
