@@ -1,3 +1,31 @@
 body{
     background-color: grey;
 }
+
+.calculator-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:1000px;
+    flex-direction:column;
+   
+}
+
+.calculator-box{
+    width:400px;
+    height:400px;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+}
+
+.screen-container{
+    text-align: right;
+    padding:50px;
+    /* background-color:brown; */
+}
+
+.screen-box {
+    background-color:brown;
+    padding-top:60px;
+}

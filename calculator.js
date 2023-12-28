@@ -4,20 +4,20 @@ let numberStack = [];
 let operationStack = [];
 let buttonChoice = [0];
 let total = 0;
-let operationHierarchy = [];
+
 function getNumbers() {
     const numberButton = document.querySelectorAll('.numbers button');
-    let screenText = document.querySelector('.screen .screenInput');
+    let screenText = document.querySelector('.screen-box .screenInput');
     numberButton.forEach((button) => {
         button.addEventListener("mouseup", () => {
             //buttonChoice.push(button.id);
             if (buttonChoice.length <= 0) {
-                if(button.id === '.'){
+                if (button.id === '.') {
                     buttonChoice.push('0', '.');
-                }else {
+                } else {
                     buttonChoice.push(button.id);
                 }
-            }else {
+            } else {
                 if (button.id === '.' && !buttonChoice.includes('.')) {
                     buttonChoice.push(button.id);
                 } else if (button.id !== '.') {
@@ -45,67 +45,58 @@ function getNumbers() {
 
 function getOperations() {
     let operationChoice = "";
+    let isNewOperation = true;
     const operationButton = document.querySelectorAll('.operations button');
-    let screenText = document.querySelector('.screen .screenInput');
+    let screenText = document.querySelector('.screen-box .screenInput');
 
     operationButton.forEach((button) => {
         button.addEventListener("mouseup", () => {
 
             operationChoice = button.id;
-            operation = operationChoice;
-            if (numberStack.length - 1 <= operationStack.length - 1) { // should be -1
-                numberStack.push(number);
-            }
-            //number =0;
-            if (numberStack.length - 1 > operationStack.length - 2) {
-                operationStack.push(operation);
-            }
-            console.log(number);
-            console.log(operation);
-            console.log(operationStack);
-            console.log(numberStack);
-            //console.log(numberStack.length);
-            buttonChoice = [];
-            //console.log(buttonChoice);
-            screenText.textContent = operationChoice;
-            //return buttonChoice;
-            //operationChoice = [];
-            if (operationChoice === '+' || operationChoice === '-' || operationChoice === '*' || operationChoice === '/' || operationChoice === '=') {
+            if (isNewOperation) {
+                operation = operationChoice;
+                if (numberStack.length - 1 <= operationStack.length - 1) {
+                    numberStack.push(number);
+                }
 
+                if (numberStack.length - 1 > operationStack.length - 2) {
+                    operationStack.push(operation);
+                }
+                console.log(number);
+                console.log(operation);
+                console.log(operationStack);
+                console.log(numberStack);
+                //console.log(numberStack.length);
+                buttonChoice = [];
+                //console.log(buttonChoice);
+                screenText.textContent = operationChoice;
 
-                //console.log(((operationStack.length - 1 % 2) - 1);      
-                //if(((operationStack.length - 1 % 2) - 1) == 0) && (numberStack.length - 1 % 2) == 0)) {
-                // if(numberStack.length - 1 > 1){
-                //     console.log('solve using operations');
-                //     //operationStack.push('=');
-                //     solve();
-                //     console.log("before pressing = " + total);
-
-                // }
-                solve();
-                //console.log("before pressing = " + total);
-                console.log("numberstack length: " + numberStack.length);
-                console.log("operationstack length: " + operationStack.length);
-                if (operationChoice === '=' && numberStack.length - 1 > 0) {
-                    console.log("from =" + total);
-                    operationStack.pop();
-                    // console.log("----after sorting------");
-                    // console.log(operationStack);
-                    // console.log(numberStack);
-                    solve();
+                if (operationChoice === '+' || operationChoice === '-' || operationChoice === '*' || operationChoice === '/' || operationChoice === '=') {
+                    solve(); //solve after operation chosen
+                    console.log("numberstack length: " + numberStack.length);
+                    console.log("operationstack length: " + operationStack.length);
+                    isNewOperation = false;
+                    if (operationChoice === '=' && numberStack.length - 1 > 0) { //solve after = pressed
+                        isNewOperation = true;
+                        console.log("from =" + total);
+                        operationStack.pop();
+                        solve();
+                    }
                 }
             }
-
-        })
+        });
     });
-
-    //return operationButton;
+    document.querySelectorAll('.numbers button').forEach((button) => {
+        button.addEventListener("mouseup", () => {
+            isNewOperation = true;
+        });
+    });
 }
 
 function deleteOrAC(buttonID) {
-    let screenTotal = document.querySelector('.screen .screenTotal');
-    let screenText = document.querySelector('.screen .screenInput');
-    
+    let screenTotal = document.querySelector('.screen-box .screenTotal');
+    let screenText = document.querySelector('.screen-box .screenInput');
+
     if (buttonID === "clearAll") {
         clearStacks();
         total = 0;
@@ -129,11 +120,8 @@ function deleteOrAC(buttonID) {
 }
 
 function solve() {
-    let temp = 0;
-    let operationPop = 0;
     let nextNumber = 0;
-    let numberHierarchy = [];
-    let screenTotal = document.querySelector('.screen .screenTotal');
+    let screenTotal = document.querySelector('.screen-box .screenTotal');
     console.log("Num Stack: " + numberStack);
     console.log("Operation: " + operation);
     total = numberStack[0];
@@ -181,29 +169,29 @@ function solve() {
     //return total;
 }
 
-function sortOperations(a, b) {
-    if (a === '*') {
-        if (b === '/') {
-            return 1;
-        } else
-            return -1;
+// function sortOperations(a, b) {
+//     if (a === '*') {
+//         if (b === '/') {
+//             return 1;
+//         } else
+//             return -1;
 
-    } else if (a === '/') {
-        if (b === '*') {
-            return 1;
-        } else
-            return -1;
-    } else if (a === '+' || b === '+') {
-        return 1;
-    } else if (a === '-' || b === '-') {
-        return 1;
-    } else if (a === '=' || b === '=') {
-        return 0;
-    } else {
-        return 0;
-    }
-    //return a-b;
-}
+//     } else if (a === '/') {
+//         if (b === '*') {
+//             return 1;
+//         } else
+//             return -1;
+//     } else if (a === '+' || b === '+') {
+//         return 1;
+//     } else if (a === '-' || b === '-') {
+//         return 1;
+//     } else if (a === '=' || b === '=') {
+//         return 0;
+//     } else {
+//         return 0;
+//     }
+//     //return a-b;
+// }
 
 function saveTotal() {
     numberStack = [total];
@@ -217,9 +205,6 @@ function clearStacks() {
     buttonChoice = []
 }
 
-function resetValues() {
-
-}
 
 function runCalculator() {
     getNumbers();
