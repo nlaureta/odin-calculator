@@ -10,37 +10,45 @@
 </head>
 
 <body>
-    <div class="calculator-container">
-        <div class="calculator-box">
-            <div class="screen-container">
-                <div class="screen-box">
-                    <div class="screenInput">0</div>
-                    <div class="screenTotal">0</div>
+    <div class="phone">
+        <div class="calculator-container">
+            <div class="calculator-box">
+                <div class="screen-container">
+                    <div class="screen-box">
+                        <div class="screenInput">0</div>
+                        <div class="screenTotal">0</div>
+                    </div>
                 </div>
-            </div>
-            <div class="numbers">
-                <button type="button" id="1">1</button>
-                <button type="button" id="2">2</button>
-                <button type="button" id="3">3</button>
-                <button type="button" id="4">4</button>
-                <button type="button" id="5">5</button>
-                <button type="button" id="6">6</button>
-                <button type="button" id="7">7</button>
-                <button type="button" id="8">8</button>
-                <button type="button" id="9">9</button>
-                <button type="button" id="0">0</button>
-                <button type="button" id=".">.</button>
-            </div>
-            <div class="operations">
-                <button type="button" id="+">+</button>
-                <button type="button" id="-">-</button>
-                <button type="button" id="*">*</button>
-                <button type="button" id="/">/</button>
-                <button type="button" id="=">=</button>
-            </div>
-            <div class="deletions">
-                <button type="button" id="delete" onclick="deleteOrAC(this.id)">DEL</button>
-                <button type="button" id="clearAll" onclick="deleteOrAC(this.id)">AC</button>
+                <div class="delete-container">
+                    <button type="button" id="delete" onclick="deleteOrAC(this.id)">DEL</button>
+                </div>
+                <div class="num-op-container">
+                    <div class="numbers">
+                        <button type="button" id="7">7</button>
+                        <button type="button" id="8">8</button>
+                        <button type="button" id="9">9</button>
+
+                        <button type="button" id="4">4</button>
+                        <button type="button" id="5">5</button>
+                        <button type="button" id="6">6</button>
+
+                        <button type="button" id="1">1</button>
+                        <button type="button" id="2">2</button>
+                        <button type="button" id="3">3</button>
+
+                        <button type="button" id="clearAll" onclick="deleteOrAC(this.id)">AC</button>
+                        <button type="button" id="0">0</button>
+                        <button type="button" id=".">.</button>
+                    </div>
+                    <div class="operations">
+                        <button type="button" id="+">+</button>
+                        <button type="button" id="-">-</button>
+                        <button type="button" id="*">*</button>
+                        <button type="button" id="/">/</button>
+                        <button type="button" id="=">=</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

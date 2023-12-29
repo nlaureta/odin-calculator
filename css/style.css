@@ -1,31 +1,88 @@
 body{
     background-color: grey;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.phone {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:400px;
+    height:800px;
+    background-color: black;
 }
 
 .calculator-container {
     display:flex;
     justify-content: center;
     align-items: center;
-    height:1000px;
+    /* height:1000px; */
     flex-direction:column;
    
 }
 
 .calculator-box{
-    width:400px;
-    height:400px;
+    /* max-width:500px; */
+    width: 390px;
+    height:780px;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    background-color: white;
 }
 
 .screen-container{
     text-align: right;
-    padding:50px;
+    /* padding:50px; */
     /* background-color:brown; */
+    
 }
 
 .screen-box {
-    background-color:brown;
-    padding-top:60px;
+    background-color:white;
+    /* padding-top:60px; */
+    height:200px;
+    display:flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: space-evenly;
+    font-size:50px;
+}
+
+.num-op-container {
+    display:flex;
+    flex-direction:row;
+    
+}
+
+.numbers button{
+    /* display:flex; */
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+    
+}
+
+.operations button {
+    height:80px;
+    width:80px;
+    border-radius: 50%;
+}
+
+
+
+#clearAll {
+    border-radius: 50%;
+    height:80px;
+    width:80px;
+
+}
+
+.delete-container {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+
 }
