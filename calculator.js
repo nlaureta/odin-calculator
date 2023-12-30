@@ -10,7 +10,6 @@ function getNumbers() {
     let screenText = document.querySelector('.screen-box .screenInput');
     numberButton.forEach((button) => {
         button.addEventListener("mouseup", () => {
-            //buttonChoice.push(button.id);
             if (buttonChoice.length <= 0) {
                 if (button.id === '.') {
                     buttonChoice.push('0', '.');
@@ -24,23 +23,22 @@ function getNumbers() {
                     buttonChoice.push(button.id);
                 }
             }
-            number = Number(buttonChoice.join(''));
-            //console.log(typeof(number));
 
-            //console.log('returned');
-            //console.log(int);
+            if(button.id === '?') {
+                buttonChoice.pop();
+                // number = ['-'].concat(buttonChoice.toString().split(''));
+            }
+
+            number = Number(buttonChoice.join(''));
+    
             screenText.textContent = buttonChoice.join('');
-            //console.log(buttonChoice);
-            //screenText.textContent += buttonChoice;
-            //return buttonChoice;
+            
 
         });
 
 
     });
     buttonChoice = [];
-    //console.log(number);
-    // return number;
 }
 
 function getOperations() {
@@ -59,26 +57,18 @@ function getOperations() {
                     numberStack.push(number);
                 }
 
-                if (numberStack.length - 1 > operationStack.length - 2) {
+                if (numberStack.length - 1 > operationStack.length - 2 ) {
                     operationStack.push(operation);
                 }
-                console.log(number);
-                console.log(operation);
-                console.log(operationStack);
-                console.log(numberStack);
-                //console.log(numberStack.length);
+              
                 buttonChoice = [];
-                //console.log(buttonChoice);
                 screenText.textContent = operationChoice;
 
                 if (operationChoice === '+' || operationChoice === '-' || operationChoice === '*' || operationChoice === '/' || operationChoice === '=') {
                     solve(); //solve after operation chosen
-                    console.log("numberstack length: " + numberStack.length);
-                    console.log("operationstack length: " + operationStack.length);
                     isNewOperation = false;
                     if (operationChoice === '=' && numberStack.length - 1 > 0) { //solve after = pressed
                         isNewOperation = true;
-                        console.log("from =" + total);
                         operationStack.pop();
                         solve();
                     }
@@ -93,6 +83,7 @@ function getOperations() {
     });
 }
 
+//for the delete or clear all button
 function deleteOrAC(buttonID) {
     let screenTotal = document.querySelector('.screen-box .screenTotal');
     let screenText = document.querySelector('.screen-box .screenInput');
@@ -103,32 +94,19 @@ function deleteOrAC(buttonID) {
         number = 0;
         screenText.textContent = 0;
         screenTotal.textContent = 0;
-        console.log("cleared all");
     } else if (buttonID === "delete") {
         buttonChoice.pop();
         number = Number(buttonChoice.join(''));
-        //buttonChoice = [];
         screenText.textContent = number;
-        console.log("deleted num")
     }
-    // console.log("------------after AC or delete-------");
-    // console.log(number);
-    // console.log(operation);
-    // console.log(operationStack);
-    // console.log(numberStack);
-
 }
 
+//solves for operations chosen
 function solve() {
     let nextNumber = 0;
     let screenTotal = document.querySelector('.screen-box .screenTotal');
-    console.log("Num Stack: " + numberStack);
-    console.log("Operation: " + operation);
     total = numberStack[0];
-    //console.log("popped: " + num[num.length - 1]);
-    // if(operationStack.includes("=")){ 
-    //     operationStack.pop();
-    // }
+   
     if (numberStack.length - 1 < 1) {
         return;
     }
@@ -136,13 +114,8 @@ function solve() {
         nextNumber = numberStack[i + 1];
         if (nextNumber !== undefined) {
             if (operationStack[i] === '+') {
-                console.log("adding");
                 total += nextNumber;
-                //console.log("numberstack[i]: "+numberStack[i]);
-                //console.log("numberStack[i+1]: "+numberStack[i+1]);
-                //console.log("total: "+total);
             } else if (operationStack[i] === '-') {
-                console.log("subtracting");
                 total -= nextNumber;
             } else if (operationStack[i] === '*') {
                 total *= nextNumber;
@@ -150,55 +123,22 @@ function solve() {
                 total /= nextNumber;
             } else if (operationStack[i] === '=') {
                 operationStack.pop()
-            }  //else {
-            //console.log("Calculator broke. Please refresh");
-            // }
+            } 
         }
 
 
     }
     screenTotal.textContent = total;
-
-    console.log("-------after solve---------");
-    console.log(operationStack);
-    console.log(numberStack);
-    console.log("total: " + total);
-
-    //saveTotal();
-
-    //return total;
 }
 
-// function sortOperations(a, b) {
-//     if (a === '*') {
-//         if (b === '/') {
-//             return 1;
-//         } else
-//             return -1;
-
-//     } else if (a === '/') {
-//         if (b === '*') {
-//             return 1;
-//         } else
-//             return -1;
-//     } else if (a === '+' || b === '+') {
-//         return 1;
-//     } else if (a === '-' || b === '-') {
-//         return 1;
-//     } else if (a === '=' || b === '=') {
-//         return 0;
-//     } else {
-//         return 0;
-//     }
-//     //return a-b;
-// }
-
+//helper function that saves total
 function saveTotal() {
     numberStack = [total];
     operationStack = [];
     buttonChoice = [];
 }
 
+//helper function to clear all stacks
 function clearStacks() {
     numberStack = [];
     operationStack = [];
@@ -213,5 +153,4 @@ function runCalculator() {
 
 runCalculator();
 
-//deleteOrAC();
 
