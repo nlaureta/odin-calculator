@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/background/desk.jpg');
+    background-image: url('../background/desk.jpg');
     /* image from https://wallpapers.com/wood-table-background */
     margin: 0;
 }
